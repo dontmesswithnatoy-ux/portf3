@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>TapSeafood | Demo</title>
+    <style>
+        :root {
+            --navy: #102a43;
+            --teal: #0f766e;
+            --cream: #fffaf0;
+            --orange: #f59e0b
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, Arial;
+            background: #f3f7f6;
+            color: #173042
+        }
+
+        header {
+            background: var(--navy);
+            color: white;
+            padding: 22px max(5%, calc((100% - 1100px)/2));
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap
+        }
+
+        header strong {
+            font-size: 1.35rem
+        }
+
+        header a {
+            color: white;
+            text-decoration: none
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 28px auto;
+            padding: 0 18px
+        }
+
+        .intro {
+            background: linear-gradient(120deg, #d7f5ec, #fff4dc);
+            padding: 28px;
+            border-radius: 20px;
+            margin-bottom: 24px
+        }
+
+        .intro h1 {
+            margin: 0 0 8px;
+            font-size: clamp(2rem, 5vw, 3rem)
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 1fr 310px;
+            gap: 22px
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px
+        }
+
+        .card,
+        .cart {
+            background: white;
+            border: 1px solid #dce8e5;
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 8px 25px #1730420b
+        }
+
+        .food-icon {
+            font-size: 2.6rem;
+            background: #e8f7f2;
+            border-radius: 12px;
+            padding: 10px
+        }
+
+        .price {
+            font-weight: 800;
+            color: var(--teal)
+        }
+
+        button {
+            border: 0;
+            border-radius: 10px;
+            padding: 10px 14px;
+            background: var(--teal);
+            color: white;
+            font-weight: 700;
+            cursor: pointer
+        }
+
+        button:hover {
+            filter: brightness(.93)
+        }
+
+        .cart {
+            height: max-content;
+            position: sticky;
+            top: 15px
+        }
+
+        .cart h2 {
+            margin-top: 0
+        }
+
+        .cart-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            margin: 12px 0
+        }
+
+        .muted {
+            color: #617580;
+            font-size: .92rem
+        }
+
+        .total {
+            border-top: 1px solid #dce8e5;
+            padding-top: 12px;
+            font-size: 1.2rem;
+            font-weight: 800
+        }
+
+        .notice {
+            margin-top: 12px;
+            padding: 12px;
+            background: #e6f7eb;
+            border-radius: 10px;
+            display: none
+        }
+
+        .qty {
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .qty button {
+            padding: 3px 9px
+        }
+
+        @media(max-width:760px) {
+            .layout {
+                grid-template-columns: 1fr
+            }
+
+            .cart {
+                position: static
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header><strong>🦐 TapSeafood</strong><a href="index.html">← Back to Portfolio</a></header>
+    <main>
+        <section class="intro">
+            <p>ONLINE SEAFOOD ORDERING · INTERACTIVE DEMO</p>
+            <h1>Fresh picks. Easy ordering.</h1>
+            <p>Choose a sample meal, add it to your cart, and try the checkout flow. This demo uses sample data only.
+            </p>
+        </section>
+        <div class="layout">
+            <section>
+                <h2>Popular menu</h2>
+                <div class="menu" id="menu"></div>
+            </section>
+            <aside class="cart">
+                <h2>Your order <span id="count">(0)</span></h2>
+                <div id="cart-items" class="muted">Your cart is empty.</div>
+                <div class="total">Total: ₱<span id="total">0.00</span></div>
+                <p><label for="customer">Name</label><input id="customer" placeholder="Your name"
+                        style="width:100%;padding:10px;margin-top:5px;border:1px solid #ccd8d6;border-radius:8px"></p>
+                <p><label for="notes">Order notes</label><textarea id="notes" placeholder="Optional request"
+                        style="width:100%;padding:10px;margin-top:5px;border:1px solid #ccd8d6;border-radius:8px"></textarea>
+                </p><button onclick="checkout()" style="width:100%">Place sample order</button>
+                <div id="notice" class="notice"></div>
+                <p class="muted">Demo only: no payment or restaurant order is sent.</p>
+            </aside>
+        </div>
+    </main>
+    <script>
+        const products = [{ id: 1, name: "Garlic Butter Shrimp", desc: "Juicy shrimp with garlic butter", price: 249, icon: "🍤" }, { id: 2, name: "Seafood Fried Rice", desc: "Rice tossed with seafood and vegetables", price: 159, icon: "🍚" }, { id: 3, name: "Crispy Calamari", desc: "Golden squid rings with dip", price: 189, icon: "🦑" }, { id: 4, name: "Grilled Bangus Meal", desc: "Grilled milkfish, rice, and vegetables", price: 179, icon: "🐟" }]; const cart = {};
+        document.getElementById("menu").innerHTML = products.map(p => `<article class="card"><div class="food-icon">${p.icon}</div><h3>${p.name}</h3><p class="muted">${p.desc}</p><p class="price">₱${p.price.toFixed(2)}</p><button onclick="add(${p.id})">Add to order</button></article>`).join("");
+        function add(id) { cart[id] = (cart[id] || 0) + 1; render() }
+        function change(id, n) { cart[id] = (cart[id] || 0) + n; if (cart[id] <= 0) delete cart[id]; render() }
+        function render() { let ids = Object.keys(cart); document.getElementById("count").textContent = `(${ids.reduce((s, id) => s + cart[id], 0)})`; document.getElementById("cart-items").innerHTML = ids.length ? ids.map(id => { let p = products.find(x => x.id == id); return `<div class="cart-row"><div><strong>${p.name}</strong><br><span class="muted">₱${p.price} × ${cart[id]}</span><div class="qty"><button onclick="change(${id},-1)">−</button>${cart[id]}<button onclick="change(${id},1)">+</button></div></div><strong>₱${(p.price * cart[id]).toFixed(2)}</strong></div>` }).join("") : "Your cart is empty."; document.getElementById("total").textContent = ids.reduce((s, id) => s + products.find(p => p.id == id).price * cart[id], 0).toFixed(2) }
+        function checkout() { let name = document.getElementById("customer").value.trim(), ids = Object.keys(cart), notice = document.getElementById("notice"); if (!ids.length) { notice.style.display = "block"; notice.textContent = "Please add at least one menu item first."; return } if (!name) { notice.style.display = "block"; notice.textContent = "Please enter your name to continue."; return } notice.style.display = "block"; notice.innerHTML = `Thanks, ${name}! Your sample order has been created. Reference: TS-${Math.floor(10000 + Math.random() * 90000)}. Total: ₱${document.getElementById("total").textContent}.`; Object.keys(cart).forEach(k => delete cart[k]); render() }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>GrandStay | Booking Demo</title>
+    <style>
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, Arial;
+            background: #f4f6fb;
+            color: #202c42
+        }
+
+        header {
+            background: #182b49;
+            color: white;
+            padding: 22px max(5%, calc((100% - 1050px)/2));
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px
+        }
+
+        a {
+            color: inherit
+        }
+
+        main {
+            max-width: 1050px;
+            margin: 30px auto;
+            padding: 0 18px
+        }
+
+        .hero {
+            padding: 35px;
+            border-radius: 22px;
+            background: linear-gradient(120deg, #dce8ff, #f8e9d5);
+            margin-bottom: 24px
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            margin: 8px 0
+        }
+
+        .panel {
+            background: white;
+            padding: 24px;
+            border-radius: 18px;
+            box-shadow: 0 8px 26px #182b4910
+        }
+
+        .fields {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px
+        }
+
+        label {
+            display: block;
+            font-weight: 700;
+            font-size: .9rem
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccd5e3;
+            border-radius: 9px;
+            margin-top: 7px;
+            font: inherit
+        }
+
+        button {
+            background: #2456a6;
+            color: white;
+            border: 0;
+            border-radius: 10px;
+            padding: 12px 18px;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 18px
+        }
+
+        .rooms {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 20px
+        }
+
+        .room {
+            border: 1px solid #e1e6ef;
+            border-radius: 14px;
+            padding: 18px
+        }
+
+        .room .emoji {
+            font-size: 2.4rem
+        }
+
+        .price {
+            font-weight: 800;
+            color: #2456a6
+        }
+
+        .result {
+            display: none;
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 12px;
+            background: #e6f7ed;
+            border: 1px solid #b9e5c8
+        }
+
+        .hint {
+            color: #66748a;
+            font-size: .92rem
+        }
+
+        @media(max-width:600px) {
+
+            .hero,
+            .panel {
+                padding: 20px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header><strong>🏨 GrandStay Hotel & Suites</strong><a href="index.html">← Back to Portfolio</a></header>
+    <main>
+        <section class="hero">
+            <p>ROOM RESERVATION · INTERACTIVE DEMO</p>
+            <h1>Your comfortable stay starts here.</h1>
+            <p>Choose your room and dates to estimate the cost of a sample booking.</p>
+        </section>
+        <section class="panel">
+            <h2>Check availability & price</h2>
+            <div class="fields">
+                <div><label for="checkin">Check-in</label><input type="date" id="checkin"></div>
+                <div><label for="checkout">Check-out</label><input type="date" id="checkout"></div>
+                <div><label for="guests">Guests</label><select id="guests">
+                        <option>1</option>
+                        <option selected>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select></div>
+            </div>
+            <div class="rooms">
+                <label class="room">
+                    <div class="emoji">🛏️</div><input type="radio" name="room" value="2200" checked style="width:auto">
+                    Standard Room <p class="price">₱2,200 / night</p><span class="hint">Comfortable room for a short
+                        stay.</span>
+                </label>
+                <label class="room">
+                    <div class="emoji">🌆</div><input type="radio" name="room" value="3500" style="width:auto"> Deluxe
+                    Room <p class="price">₱3,500 / night</p><span class="hint">Extra space and city views.</span>
+                </label>
+                <label class="room">
+                    <div class="emoji">✨</div><input type="radio" name="room" value="5200" style="width:auto"> Suite <p
+                        class="price">₱5,200 / night</p><span class="hint">A spacious premium option.</span>
+                </label>
+            </div><button onclick="book()">Calculate sample booking</button>
+            <div class="result" id="result"></div>
+            <p class="hint">Demo only: availability is simulated. This does not reserve a real hotel room or collect
+                payment.</p>
+        </section>
+    </main>
+    <script>
+        const ci = document.getElementById("checkin"), co = document.getElementById("checkout"); let today = new Date(); today.setMinutes(today.getMinutes() - today.getTimezoneOffset()); let date = today.toISOString().slice(0, 10); ci.min = date; co.min = date; ci.value = date; let tomorrow = new Date(today); tomorrow.setDate(tomorrow.getDate() + 1); co.value = tomorrow.toISOString().slice(0, 10);
+        ci.addEventListener("change", () => { co.min = ci.value; if (co.value <= ci.value) { let d = new Date(ci.value + "T12:00:00"); d.setDate(d.getDate() + 1); co.value = d.toISOString().slice(0, 10) } });
+        function book() { const a = new Date(ci.value + "T12:00:00"), b = new Date(co.value + "T12:00:00"), n = Math.round((b - a) / 86400000), rate = Number(document.querySelector('input[name="room"]:checked').value), g = document.getElementById("guests").value, r = document.getElementById("result"); r.style.display = "block"; if (!ci.value || !co.value || n < 1) { r.textContent = "Please choose a valid check-in and check-out date. Check-out must be at least one day after check-in."; return } const subtotal = n * rate, tax = subtotal * .12; r.innerHTML = `<h3>Sample booking estimate</h3><p>Room: ${document.querySelector('input[name="room"]:checked').parentElement.textContent.trim().split('\\n')[0]}</p><p>Guests: ${g} · Nights: ${n}</p><p>Room subtotal: ₱${subtotal.toLocaleString("en-PH", { minimumFractionDigits: 2 })}</p><p>Estimated 12% tax: ₱${tax.toLocaleString("en-PH", { minimumFractionDigits: 2 })}</p><h2>Total estimate: ₱${(subtotal + tax).toLocaleString("en-PH", { minimumFractionDigits: 2 })}</h2><strong>Demo reference: GS-${Math.floor(10000 + Math.random() * 90000)}</strong><p>This is an estimate only, not a confirmed reservation.</p>` }
+    </script>
+</body>
+
+</html>

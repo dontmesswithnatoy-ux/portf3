@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle Grid Pattern -->
+  <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+    <line x1="0" y1="135" x2="1200" y2="135"/>
+    <line x1="0" y1="270" x2="1200" y2="270"/>
+    <line x1="0" y1="405" x2="1200" y2="405"/>
+    <line x1="0" y1="540" x2="1200" y2="540"/>
+    <line x1="300" y1="0" x2="300" y2="675"/>
+    <line x1="600" y1="0" x2="600" y2="675"/>
+    <line x1="900" y1="0" x2="900" y2="675"/>
+  </g>
+
+  <!-- Browser Window Chrome -->
+  <rect x="80" y="45" width="1040" height="585" rx="16" fill="#111827" stroke="rgba(255,255,255,0.12)" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="80" y="45" width="1040" height="52" rx="16" fill="#1e293b"/>
+  <!-- Window Dots -->
+  <circle cx="115" cy="71" r="7" fill="#ef4444"/>
+  <circle cx="137" cy="71" r="7" fill="#f59e0b"/>
+  <circle cx="159" cy="71" r="7" fill="#10b981"/>
+  <!-- Address Bar -->
+  <rect x="200" y="58" width="600" height="26" rx="6" fill="#0f172a" stroke="rgba(255,255,255,0.08)"/>
+  <text x="220" y="75" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">https://hotel-grandstay.local/booking/rooms</text>
+
+  <!-- Navbar -->
+  <g transform="translate(110, 115)">
+    <text x="0" y="24" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="20" font-weight="800">🏨 GrandStay Hotel &amp; Suites</text>
+    <text x="450" y="22" fill="#38bdf8" font-family="-apple-system, sans-serif" font-size="13" font-weight="600">Rooms &amp; Suites</text>
+    <text x="580" y="22" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="13">Amenities</text>
+    <text x="680" y="22" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="13">Location</text>
+    <text x="770" y="22" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="13">My Bookings</text>
+    <rect x="870" y="4" width="110" height="32" rx="6" fill="url(#goldGrad)"/>
+    <text x="925" y="25" fill="#ffffff" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" text-anchor="middle">Book Now</text>
+  </g>
+
+  <!-- Date & Guest Search Filter Bar -->
+  <g transform="translate(110, 175)">
+    <rect width="980" height="64" rx="10" fill="#1e293b" stroke="rgba(255,255,255,0.1)"/>
+    
+    <!-- Check-In -->
+    <text x="24" y="25" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11" font-weight="600">CHECK-IN</text>
+    <text x="24" y="47" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="14" font-weight="700">Oct 28, 2026</text>
+    <line x1="220" y1="14" x2="220" y2="50" stroke="rgba(255,255,255,0.1)"/>
+
+    <!-- Check-Out -->
+    <text x="244" y="25" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11" font-weight="600">CHECK-OUT</text>
+    <text x="244" y="47" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="14" font-weight="700">Nov 02, 2026</text>
+    <line x1="440" y1="14" x2="440" y2="50" stroke="rgba(255,255,255,0.1)"/>
+
+    <!-- Guests & Rooms -->
+    <text x="464" y="25" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11" font-weight="600">GUESTS &amp; ROOMS</text>
+    <text x="464" y="47" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="14" font-weight="700">2 Adults, 1 Room</text>
+    <line x1="680" y1="14" x2="680" y2="50" stroke="rgba(255,255,255,0.1)"/>
+
+    <!-- Room Type -->
+    <text x="704" y="25" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11" font-weight="600">ROOM CLASS</text>
+    <text x="704" y="47" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="14" font-weight="700">Deluxe Ocean Suite</text>
+
+    <!-- Search Button -->
+    <rect x="850" y="12" width="116" height="40" rx="8" fill="url(#blueGrad)"/>
+    <text x="908" y="37" fill="#ffffff" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" text-anchor="middle">Check Rates</text>
+  </g>
+
+  <!-- Room Cards Grid -->
+  <!-- Room Card 1: Deluxe King Suite -->
+  <g transform="translate(110, 260)">
+    <rect width="310" height="340" rx="12" fill="#1e293b" stroke="rgba(255,255,255,0.08)"/>
+    <!-- Room Media Graphic -->
+    <rect width="310" height="150" rx="12" fill="#0f172a"/>
+    <rect x="20" y="20" width="270" height="110" rx="8" fill="url(#blueGrad)" opacity="0.3"/>
+    <!-- Bed Icon Illustration -->
+    <path d="M70,85 h170 v30 h-170 z M90,65 h50 v20 h-50 z M170,65 h50 v20 h-50 z" fill="#38bdf8" opacity="0.8"/>
+    <rect x="20" y="20" width="85" height="24" rx="4" fill="#10b981"/>
+    <text x="62" y="36" fill="#ffffff" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" text-anchor="middle">Available</text>
+
+    <!-- Content -->
+    <text x="20" y="180" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="16" font-weight="700">Deluxe Ocean Suite</text>
+    <text x="20" y="202" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="12">1 King Bed • Ocean View • Balcony</text>
+    <text x="20" y="222" fill="#64748b" font-family="-apple-system, sans-serif" font-size="11">Free Wi-Fi • Breakfast Included</text>
+
+    <text x="20" y="268" fill="#38bdf8" font-family="-apple-system, sans-serif" font-size="22" font-weight="800">$189<tspan font-size="13" fill="#94a3b8" font-weight="500"> / night</tspan></text>
+    <rect x="20" y="286" width="270" height="36" rx="6" fill="url(#blueGrad)"/>
+    <text x="155" y="309" fill="#ffffff" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" text-anchor="middle">Book This Room</text>
+  </g>
+
+  <!-- Room Card 2: Executive Double Queen -->
+  <g transform="translate(445, 260)">
+    <rect width="310" height="340" rx="12" fill="#1e293b" stroke="rgba(255,255,255,0.08)"/>
+    <rect width="310" height="150" rx="12" fill="#0f172a"/>
+    <rect x="20" y="20" width="270" height="110" rx="8" fill="url(#goldGrad)" opacity="0.3"/>
+    <path d="M70,85 h170 v30 h-170 z M90,65 h50 v20 h-50 z M170,65 h50 v20 h-50 z" fill="#f59e0b" opacity="0.8"/>
+    <rect x="20" y="20" width="85" height="24" rx="4" fill="#10b981"/>
+    <text x="62" y="36" fill="#ffffff" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" text-anchor="middle">Available</text>
+
+    <!-- Content -->
+    <text x="20" y="180" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="16" font-weight="700">Executive Double Queen</text>
+    <text x="20" y="202" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="12">2 Queen Beds • City Skyline View</text>
+    <text x="20" y="222" fill="#64748b" font-family="-apple-system, sans-serif" font-size="11">Mini-bar • Smart TV • Work Desk</text>
+
+    <text x="20" y="268" fill="#f59e0b" font-family="-apple-system, sans-serif" font-size="22" font-weight="800">$149<tspan font-size="13" fill="#94a3b8" font-weight="500"> / night</tspan></text>
+    <rect x="20" y="286" width="270" height="36" rx="6" fill="#334155"/>
+    <text x="155" y="309" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" text-anchor="middle">Book This Room</text>
+  </g>
+
+  <!-- Room Card 3: Presidential Penthouse -->
+  <g transform="translate(780, 260)">
+    <rect width="310" height="340" rx="12" fill="#1e293b" stroke="rgba(255,255,255,0.08)"/>
+    <rect width="310" height="150" rx="12" fill="#0f172a"/>
+    <rect x="20" y="20" width="270" height="110" rx="8" fill="url(#cardGrad)" opacity="0.9"/>
+    <path d="M70,85 h170 v30 h-170 z M90,65 h50 v20 h-50 z M170,65 h50 v20 h-50 z" fill="#a855f7" opacity="0.8"/>
+    <rect x="20" y="20" width="95" height="24" rx="4" fill="#6366f1"/>
+    <text x="67" y="36" fill="#ffffff" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" text-anchor="middle">VIP Suite</text>
+
+    <!-- Content -->
+    <text x="20" y="180" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="16" font-weight="700">Presidential Penthouse</text>
+    <text x="20" y="202" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="12">Master Suite • Private Jacuzzi</text>
+    <text x="20" y="222" fill="#64748b" font-family="-apple-system, sans-serif" font-size="11">24/7 Concierge • Complimentary Wine</text>
+
+    <text x="20" y="268" fill="#a855f7" font-family="-apple-system, sans-serif" font-size="22" font-weight="800">$340<tspan font-size="13" fill="#94a3b8" font-weight="500"> / night</tspan></text>
+    <rect x="20" y="286" width="270" height="36" rx="6" fill="#334155"/>
+    <text x="155" y="309" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" text-anchor="middle">Book This Room</text>
+  </g>
+</svg>

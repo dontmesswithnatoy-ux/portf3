@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SmartDispense | Animated Simulation Demo</title>
+  <style>
+    :root {
+      --ink: #173246;
+      --muted: #62798a;
+      --teal: #078b98;
+      --blue: #45b8df;
+      --line: #dbe6ed;
+      --water: 65%
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, Arial, sans-serif;
+      background: #eef4f8;
+      color: var(--ink)
+    }
+
+    header {
+      background: #15334a;
+      color: white;
+      padding: 18px max(5%, calc((100% - 1100px)/2));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+      font-weight: 700
+    }
+
+    header a:hover {
+      text-decoration: underline
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 28px auto;
+      padding: 0 18px 36px
+    }
+
+    .hero {
+      padding: 30px;
+      border-radius: 22px;
+      background: linear-gradient(120deg, #d4f2ee, #e3edff);
+      margin-bottom: 22px;
+      overflow: hidden;
+      position: relative
+    }
+
+    .eyebrow {
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .13em;
+      color: #176f7b
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.1rem);
+      margin: 8px 0
+    }
+
+    .hero p {
+      max-width: 700px;
+      line-height: 1.6
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #e5f7eb;
+      color: #17653a;
+      font-weight: 800;
+      font-size: .88rem
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+      gap: 20px
+    }
+
+    .panel {
+      background: white;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 8px 25px #15334a0c;
+      border: 1px solid #e7eef3;
+      min-width: 0
+    }
+
+    .panel h2 {
+      margin-top: 0
+    }
+
+    .machine {
+      min-height: 340px;
+      background: radial-gradient(ellipse at center, #f8fcff 0, #e7eef3 75%);
+      border: 2px solid #c8d8e2;
+      border-radius: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden
+    }
+
+    .sensor {
+      position: absolute;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 76px;
+      height: 30px;
+      border-radius: 8px;
+      background: #334e60;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      box-shadow: 0 4px 8px #17324624
+    }
+
+    .sensor span {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #7ee8f0;
+      box-shadow: 0 0 8px #7ee8f0
+    }
+
+    .sensor span.pulse {
+      animation: sensorPulse 1s infinite
+    }
+
+    @keyframes sensorPulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        box-shadow: 0 0 5px #7ee8f0
+      }
+
+      50% {
+        opacity: .35;
+        box-shadow: 0 0 17px #7ee8f0
+      }
+    }
+
+    .rays {
+      position: absolute;
+      top: 54px;
+      left: 50%;
+      width: 130px;
+      height: 95px;
+      transform: translateX(-50%);
+      opacity: .0;
+      pointer-events: none
+    }
+
+    .rays:before,
+    .rays:after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 2px dashed #0795aa;
+      border-top: 0;
+      border-radius: 0 0 50% 50%;
+      width: 70px;
+      height: 35px
+    }
+
+    .rays:after {
+      top: 20px;
+      width: 110px;
+      height: 55px
+    }
+
+    .machine.detecting .rays {
+      opacity: 1;
+      animation: rayBlink .8s infinite
+    }
+
+    @keyframes rayBlink {
+      50% {
+        opacity: .25
+      }
+    }
+
+    .tank {
+      width: 126px;
+      height: 155px;
+      border: 5px solid #526e80;
+      border-radius: 16px 16px 28px 28px;
+      background: linear-gradient(to top, #45b8df 0%, #45b8df var(--water), #fff var(--water), #fff 100%);
+      position: relative;
+      margin-top: 60px;
+      box-shadow: inset 0 0 0 3px #ffffff90;
+      transition: background 1s
+    }
+
+    .tank:after {
+      content: "WATER";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: #17445a;
+      letter-spacing: .08em
+    }
+
+    .tap {
+      width: 66px;
+      height: 12px;
+      background: #526e80;
+      margin-top: 6px;
+      border-radius: 4px;
+      position: relative
+    }
+
+    .tap:after {
+      content: "";
+      position: absolute;
+      width: 22px;
+      height: 15px;
+      background: #526e80;
+      right: 4px;
+      top: -13px;
+      border-radius: 5px 5px 0 0
+    }
+
+    .stream {
+      height: 0;
+      width: 8px;
+      background: linear-gradient(#68d5f4, #1b9dcc);
+      border-radius: 8px;
+      margin-top: 0;
+      opacity: 0
+    }
+
+    .machine.dispensing .stream {
+      height: 60px;
+      opacity: 1;
+      animation: waterFlow .35s linear infinite
+    }
+
+    @keyframes waterFlow {
+      0% {
+        transform: scaleY(.7);
+        opacity: .6
+      }
+
+      50% {
+        transform: scaleY(1);
+        opacity: 1
+      }
+
+      100% {
+        transform: scaleY(.75);
+        opacity: .7
+      }
+    }
+
+    .cup {
+      font-size: 2.1rem;
+      margin-top: 0;
+      filter: drop-shadow(0 3px 2px #17324618);
+      transition: transform .3s
+    }
+
+    .machine.dispensing .cup {
+      transform: translateY(2px) scale(1.08)
+    }
+
+    .status {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 20px;
+      background: #e5f7eb;
+      color: #17653a;
+      font-weight: 800
+    }
+
+    .status.off {
+      background: #fff0dc;
+      color: #8b4c0a
+    }
+
+    .status.active {
+      background: #dff5ff;
+      color: #075b86
+    }
+
+    .controls {
+      text-align: center;
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px
+    }
+
+    button {
+      background: #087f8c;
+      color: white;
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .15s, filter .15s;
+      box-shadow: 0 4px 9px #087f8c20
+    }
+
+    button:hover:not(:disabled) {
+      filter: brightness(1.07);
+      transform: translateY(-1px)
+    }
+
+    button:active:not(:disabled) {
+      transform: translateY(1px)
+    }
+
+    button.secondary {
+      background: #526e80
+    }
+
+    button.stop {
+      background: #b93b4a
+    }
+
+    button:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      box-shadow: none
+    }
+
+    .stat {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #e1e8ed;
+      padding: 12px 0;
+      gap: 12px
+    }
+
+    .stat strong {
+      font-variant-numeric: tabular-nums;
+      text-align: right
+    }
+
+    .meter-wrap {
+      height: 10px;
+      background: #e5edf2;
+      border-radius: 99px;
+      overflow: hidden;
+      margin: 9px 0 15px
+    }
+
+    .meter {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #0795aa, #65c9e8);
+      border-radius: 99px;
+      transition: width .35s
+    }
+
+    .log {
+      margin-top: 12px;
+      padding: 12px;
+      background: #f2f7fa;
+      border-radius: 10px;
+      min-height: 60px;
+      line-height: 1.5
+    }
+
+    .note {
+      font-size: .92rem;
+      color: var(--muted);
+      line-height: 1.55
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px
+    }
+
+    .mini {
+      padding: 13px;
+      border-radius: 12px;
+      background: #f5f9fb
+    }
+
+    .mini span {
+      display: block;
+      color: var(--muted);
+      font-size: .85rem
+    }
+
+    .mini strong {
+      font-size: 1.1rem
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: .85rem;
+      padding: 18px
+    }
+
+    @media(max-width:760px) {
+      .grid {
+        grid-template-columns: 1fr
+      }
+
+      .machine {
+        min-height: 320px
+      }
+
+      .hero {
+        padding: 23px
+      }
+
+      .panel {
+        padding: 17px
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+
+      *,
+      *:before,
+      *:after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header><strong>💧 SmartDispense</strong><a href="index.html">← Back to Portfolio</a></header>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">ARDUINO + ULTRASONIC SENSOR · INTERACTIVE SOFTWARE SIMULATION</p>
+      <h1>Touchless Water Dispenser</h1>
+      <p>Move through a simulated hand-detection cycle. Watch the sensor waves, pump state, water stream, and volume
+        counter change as the buttons run the demonstration.</p>
+      <span class="pill" id="heroPill">● Simulation ready</span>
+    </section>
+    <div class="grid">
+      <section class="panel">
+        <h2>Dispenser simulation</h2>
+        <div class="machine" id="machine">
+          <div class="sensor" aria-label="Ultrasonic sensor"><span id="sensorLeft"></span><span id="sensorRight"></span>
+          </div>
+          <div class="rays"></div>
+          <div class="tank" id="tank"></div>
+          <div class="tap"></div>
+          <div class="stream" id="stream"></div>
+          <div class="cup" id="cup">🥤</div>
+        </div>
+        <p style="text-align:center"><span class="status off" id="status" role="status">Waiting for hand</span></p>
+        <div class="controls">
+          <button id="detectBtn">✋ Simulate hand detected</button>
+          <button id="pourBtn">💧 Dispense 150 mL</button>
+          <button class="stop" id="stopBtn" disabled>■ Stop pump</button>
+          <button class="secondary" id="resetBtn">↻ Reset simulation</button>
+        </div>
+        <p class="note">Try “Simulate hand detected” for an automatic 3-second dispense cycle, or use “Dispense 150 mL”
+          to trigger one portion manually.</p>
+      </section>
+      <section class="panel">
+        <h2>Sensor &amp; system status</h2>
+        <div class="stat"><span>Ultrasonic distance</span><strong id="distance">28 cm</strong></div>
+        <div class="stat"><span>Detection threshold</span><strong>10 cm</strong></div>
+        <div class="stat"><span>Relay / pump</span><strong id="pump">OFF</strong></div>
+        <div class="stat"><span>Water dispensed</span><strong id="volume">0 mL</strong></div>
+        <div class="stat"><span>System</span><strong id="system">Standby</strong></div>
+        <div class="stat"><span>Current dispense</span><strong id="current">0 / 150 mL</strong></div>
+        <div class="meter-wrap">
+          <div class="meter" id="meter"></div>
+        </div>
+        <div class="mini-grid">
+          <div class="mini"><span>Detection events</span><strong id="events">0</strong></div>
+          <div class="mini"><span>Portions served</span><strong id="portions">0</strong></div>
+        </div>
+        <h3>Activity log</h3>
+        <div class="log" id="log" aria-live="polite">System initialized. Waiting for sensor input.</div>
+        <p class="note">This is a browser-only simulation. A real prototype would need an Arduino, HC-SR04 sensor, relay
+          module, pump, safe power supply, and appropriate wiring.</p>
+      </section>
+    </div>
+  </main>
+  <footer>SmartDispense demo · Simulated sensor readings only · No physical hardware connected</footer>
+  <script>
+    (() => {
+      const $ = id => document.getElementById(id);
+      const state = { ml: 0, events: 0, portions: 0, active: false, busy: false, timer: null, interval: null, cycle: 0 };
+      const updateStats = () => {
+        $('volume').textContent = state.ml + ' mL';
+        $('events').textContent = state.events;
+        $('portions').textContent = state.portions;
+      };
+      function log(message) { $('log').textContent = message; }
+      function idle() {
+        state.active = false; state.busy = false;
+        $('machine').classList.remove('detecting', 'dispensing');
+        $('pump').textContent = 'OFF'; $('system').textContent = 'Standby';
+        $('status').textContent = 'Waiting for hand'; $('status').className = 'status off';
+        $('heroPill').textContent = '● Simulation ready';
+        $('distance').textContent = '28 cm';
+        $('sensorLeft').classList.remove('pulse'); $('sensorRight').classList.remove('pulse');
+        $('cup').textContent = '🥤'; $('current').textContent = '0 / 150 mL'; $('meter').style.width = '0%';
+        $('tank').style.setProperty('--water', '65%');
+        $('stopBtn').disabled = true; $('detectBtn').disabled = false; $('pourBtn').disabled = false;
+      }
+      function startPump(source = 'manual') {
+        if (state.busy) return;
+        state.busy = true; state.active = true; state.cycle = 0;
+        state.events++;
+        $('machine').classList.add('detecting', 'dispensing');
+        $('distance').textContent = '6 cm';
+        $('pump').textContent = 'ON'; $('system').textContent = 'Dispensing';
+        $('status').textContent = 'Hand detected — dispensing'; $('status').className = 'status active';
+        $('heroPill').textContent = '● Pump active';
+        $('sensorLeft').classList.add('pulse'); $('sensorRight').classList.add('pulse');
+        $('cup').textContent = '🥤💧';
+        $('stopBtn').disabled = false; $('detectBtn').disabled = true; $('pourBtn').disabled = true;
+        $('tank').style.setProperty('--water', '55%');
+        log((source === 'auto' ? 'Hand detected inside 10 cm threshold.' : 'Manual dispense started.') + ' Relay activated; pump is running.');
+        const target = 150, duration = 3000, started = Date.now();
+        $('current').textContent = '0 / ' + target + ' mL'; $('meter').style.width = '0%';
+        state.interval = setInterval(() => {
+          const elapsed = Math.min(Date.now() - started, duration);
+          const delivered = Math.round(target * elapsed / duration);
+          $('current').textContent = delivered + ' / ' + target + ' mL';
+          $('meter').style.width = (delivered / target * 100) + '%';
+          $('tank').style.setProperty('--water', (55 - delivered / target * 8) + '%');
+          if (elapsed >= duration) {
+            clearInterval(state.interval); state.interval = null;
+            state.ml += target; state.portions++; updateStats();
+            finishPump();
+          }
+        }, 80);
+      }
+      function finishPump() {
+        state.busy = false; state.active = false;
+        $('machine').classList.remove('detecting', 'dispensing');
+        $('pump').textContent = 'OFF'; $('system').textContent = 'Complete';
+        $('status').textContent = 'Portion dispensed'; $('status').className = 'status';
+        $('heroPill').textContent = '● Cycle complete';
+        $('distance').textContent = '28 cm';
+        $('sensorLeft').classList.remove('pulse'); $('sensorRight').classList.remove('pulse');
+        $('cup').textContent = '🥤💧'; $('stopBtn').disabled = true;
+        $('detectBtn').disabled = false; $('pourBtn').disabled = false;
+        $('tank').style.setProperty('--water', '65%');
+        log('Dispense cycle complete. Simulated 150 mL delivered; relay switched OFF automatically.');
+      }
+      function stopPump() {
+        if (!state.busy) return;
+        clearInterval(state.interval); state.interval = null;
+        state.busy = false; state.active = false;
+        $('machine').classList.remove('detecting', 'dispensing');
+        $('pump').textContent = 'OFF'; $('system').textContent = 'Stopped';
+        $('status').textContent = 'Pump stopped'; $('status').className = 'status off';
+        $('heroPill').textContent = '● Pump stopped';
+        $('distance').textContent = '28 cm';
+        $('sensorLeft').classList.remove('pulse'); $('sensorRight').classList.remove('pulse');
+        $('cup').textContent = '🥤'; $('stopBtn').disabled = true;
+        $('detectBtn').disabled = false; $('pourBtn').disabled = false;
+        $('current').textContent = 'Stopped early'; $('tank').style.setProperty('--water', '65%');
+        log('Pump stopped by user. Incomplete portion was not added to the total.');
+      }
+      function resetAll() {
+        clearInterval(state.interval); state.interval = null;
+        state.ml = 0; state.events = 0; state.portions = 0; state.active = false; state.busy = false;
+        updateStats(); idle(); log('Simulation reset. Counters cleared; sensor is ready.');
+      }
+      $('detectBtn').addEventListener('click', () => startPump('auto'));
+      $('pourBtn').addEventListener('click', () => startPump('manual'));
+      $('stopBtn').addEventListener('click', stopPump);
+      $('resetBtn').addEventListener('click', resetAll);
+      idle();
+    })();
+  </script>
+</body>
+
+</html>

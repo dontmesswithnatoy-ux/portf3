@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <linearGradient id="iotBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a101d"/>
+      <stop offset="100%" stop-color="#0f1f38"/>
+    </linearGradient>
+    <linearGradient id="arduinoTeal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00979c"/>
+      <stop offset="100%" stop-color="#006468"/>
+    </linearGradient>
+    <linearGradient id="waterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="lcdGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b"/>
+      <stop offset="100%" stop-color="#022c22"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#iotBg)"/>
+
+  <!-- Circuit Trace Lines -->
+  <g stroke="rgba(0, 151, 156, 0.2)" stroke-width="2" fill="none">
+    <path d="M50,100 H200 L250,150 H500"/>
+    <path d="M50,200 H150 L200,250 H350"/>
+    <path d="M700,100 H900 L950,150 H1150"/>
+    <path d="M850,550 H1000 L1050,500 H1150"/>
+    <circle cx="250" cy="150" r="4" fill="#00979c"/>
+    <circle cx="500" cy="150" r="4" fill="#00979c"/>
+    <circle cx="950" cy="150" r="4" fill="#38bdf8"/>
+  </g>
+
+  <!-- Outer Frame -->
+  <rect x="60" y="40" width="1080" height="595" rx="16" fill="#111827" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+
+  <!-- Header Banner -->
+  <g transform="translate(100, 75)">
+    <rect width="1000" height="50" rx="8" fill="#1e293b"/>
+    <circle cx="25" cy="25" r="8" fill="#10b981" filter="url(#glow)"/>
+    <text x="45" y="31" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="16" font-weight="800">SMARTDISPENSE • Touchless Automated Water Dispenser</text>
+    <text x="760" y="31" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="13">Arduino Uno • HC-SR04 • 5V Relay</text>
+  </g>
+
+  <!-- LEFT: Hardware Breadboard & Arduino Board Showcase -->
+  <g transform="translate(100, 150)">
+    <!-- Circuit Area Frame -->
+    <rect width="470" height="440" rx="12" fill="#1e293b" stroke="rgba(255,255,255,0.08)"/>
+
+    <!-- Arduino Board -->
+    <rect x="30" y="30" width="220" height="150" rx="8" fill="url(#arduinoTeal)" stroke="#00b4d8" stroke-width="1.5"/>
+    <text x="45" y="60" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="16" font-weight="800">ARDUINO</text>
+    <text x="45" y="78" fill="#99f6e4" font-family="'JetBrains Mono', monospace" font-size="12">UNO R3</text>
+    <!-- USB Port -->
+    <rect x="15" y="45" width="22" height="28" rx="3" fill="#cbd5e1" stroke="#475569"/>
+    <!-- ATMega Chip -->
+    <rect x="80" y="90" width="90" height="30" rx="2" fill="#0f172a"/>
+    <text x="125" y="110" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="9" text-anchor="middle">ATmega328P</text>
+    <!-- Pin Headers -->
+    <rect x="40" y="35" width="190" height="8" rx="1" fill="#0f172a"/>
+    <rect x="40" y="165" width="190" height="8" rx="1" fill="#0f172a"/>
+
+    <!-- 5V Relay Module -->
+    <rect x="280" y="30" width="160" height="150" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+    <rect x="300" y="55" width="120" height="70" rx="4" fill="#2563eb"/>
+    <text x="360" y="95" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" text-anchor="middle">5V RELAY</text>
+    <circle cx="310" cy="145" r="5" fill="#ef4444"/>
+    <circle cx="330" cy="145" r="5" fill="#10b981" filter="url(#glow)"/>
+    <text x="350" y="150" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11">PUMP ACTIVE</text>
+
+    <!-- Ultrasonic Proximity Sensor HC-SR04 -->
+    <rect x="30" y="215" width="190" height="95" rx="6" fill="#0284c7" stroke="#38bdf8"/>
+    <circle cx="80" cy="262" r="28" fill="#e2e8f0" stroke="#64748b" stroke-width="4"/>
+    <circle cx="170" cy="262" r="28" fill="#e2e8f0" stroke="#64748b" stroke-width="4"/>
+    <text x="80" y="267" fill="#0f172a" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="800" text-anchor="middle">TX</text>
+    <text x="170" y="267" fill="#0f172a" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="800" text-anchor="middle">RX</text>
+    <text x="125" y="232" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" text-anchor="middle">HC-SR04 ULTRASONIC</text>
+
+    <!-- 16x2 I2C LCD Display -->
+    <rect x="250" y="215" width="190" height="95" rx="6" fill="#047857" stroke="#10b981"/>
+    <rect x="260" y="225" width="170" height="75" rx="4" fill="url(#lcdGrad)"/>
+    <text x="270" y="255" fill="#34d399" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">STATUS: POURING</text>
+    <text x="270" y="280" fill="#6ee7b7" font-family="'JetBrains Mono', monospace" font-size="11">GLASS DETECTED</text>
+
+    <!-- C++ Logic Specs -->
+    <rect x="30" y="335" width="410" height="75" rx="8" fill="#0f172a" stroke="rgba(255,255,255,0.06)"/>
+    <text x="45" y="360" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="11">// Trigger: distance &lt; 10cm</text>
+    <text x="45" y="380" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="12">digitalWrite(RELAY_PIN, LOW); // Pump ON</text>
+    <text x="45" y="398" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="11">delay(3500); // 250ml measured dispense</text>
+  </g>
+
+  <!-- RIGHT: Physical Dispenser Unit Simulation -->
+  <g transform="translate(610, 150)">
+    <rect width="490" height="440" rx="12" fill="#1e293b" stroke="rgba(255,255,255,0.08)"/>
+
+    <!-- Dispenser Station Housing -->
+    <rect x="60" y="40" width="220" height="360" rx="14" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    
+    <!-- Water Bottle on top -->
+    <path d="M120,40 C120,15 220,15 220,40 Z" fill="#0284c7" opacity="0.6"/>
+    <rect x="140" y="10" width="60" height="30" rx="4" fill="#38bdf8"/>
+
+    <!-- Water Reservoir Level -->
+    <rect x="75" y="60" width="190" height="80" rx="6" fill="url(#waterGrad)" opacity="0.8"/>
+    <text x="170" y="105" fill="#ffffff" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" text-anchor="middle">Pure Water 100%</text>
+
+    <!-- Nozzle Dispensing Tube -->
+    <rect x="160" y="150" width="20" height="30" rx="2" fill="#94a3b8"/>
+    <!-- Flowing Water Stream -->
+    <path d="M167,180 C167,230 173,230 173,280" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" filter="url(#glow)"/>
+    <circle cx="170" cy="240" r="3" fill="#ffffff"/>
+    <circle cx="170" cy="265" r="4" fill="#ffffff"/>
+
+    <!-- Ultrasonic Sensing Cone Waves -->
+    <path d="M210,195 C230,210 230,240 210,255" fill="none" stroke="#10b981" stroke-width="2.5" stroke-dasharray="4,4" filter="url(#glow)"/>
+    <path d="M225,185 C255,210 255,250 225,275" fill="none" stroke="#10b981" stroke-width="2.5" stroke-dasharray="4,4" opacity="0.7"/>
+
+    <!-- Glass Cup Being Filled -->
+    <path d="M140,270 L148,350 C149,355 155,360 160,360 H180 C185,360 191,355 192,350 L200,270 Z" fill="rgba(255,255,255,0.15)" stroke="#e2e8f0" stroke-width="2"/>
+    <!-- Water inside glass -->
+    <path d="M144,310 L148,350 C149,355 155,360 160,360 H180 C185,360 191,355 192,350 L196,310 Z" fill="url(#waterGrad)" opacity="0.85"/>
+
+    <!-- System Info Panel on Right -->
+    <g transform="translate(305, 45)">
+      <text x="0" y="20" fill="#38bdf8" font-family="-apple-system, sans-serif" font-size="14" font-weight="700">TECHNICAL METRICS</text>
+      
+      <rect y="35" width="160" height="55" rx="6" fill="#0f172a" stroke="rgba(255,255,255,0.06)"/>
+      <text x="14" y="55" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="10">TRIGGER DISTANCE</text>
+      <text x="14" y="75" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="15" font-weight="700">&lt;= 8.5 cm</text>
+
+      <rect y="100" width="160" height="55" rx="6" fill="#0f172a" stroke="rgba(255,255,255,0.06)"/>
+      <text x="14" y="120" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="10">FLOW RATE</text>
+      <text x="14" y="140" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="15" font-weight="700">1.2 L / min</text>
+
+      <rect y="165" width="160" height="55" rx="6" fill="#0f172a" stroke="rgba(255,255,255,0.06)"/>
+      <text x="14" y="185" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="10">SAFETY CUT-OFF</text>
+      <text x="14" y="205" fill="#f59e0b" font-family="'JetBrains Mono', monospace" font-size="15" font-weight="700">5.0 seconds</text>
+
+      <rect y="235" width="160" height="110" rx="8" fill="#0f172a" stroke="rgba(255,255,255,0.06)"/>
+      <text x="14" y="260" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">Hardware Stack:</text>
+      <text x="14" y="280" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11">• Arduino Uno C++</text>
+      <text x="14" y="298" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11">• HC-SR04 Sensor</text>
+      <text x="14" y="316" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11">• 5V Relay &amp; 12V Pump</text>
+      <text x="14" y="334" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11">• 16x2 I2C LCD</text>
+    </g>
+  </g>
+</svg>
