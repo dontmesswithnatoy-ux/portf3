@@ -11,7 +11,7 @@
     <meta name="description"
         content="Building dynamic web applications with PHP & MySQL, and bridging hardware with Arduino automation. Explore junior web developer projects, skills in HTML, CSS, JavaScript, and PHP.">
     <meta name="keywords"
-        content="web developer portfolio, junior developer, frontend developer, PHP beginner portfolio, JavaScript projects, HTML CSS portfolio, Jevy B. Toledo, TapSeafood, Arduino dispenser, GrandStay hotel booking">
+        content="web developer portfolio, junior developer, frontend developer, PHP beginner portfolio, JavaScript projects, HTML CSS portfolio, problem solving, debugging, Jevy B. Toledo, TapSeafood, Arduino dispenser, GrandStay hotel booking">
     <meta name="author" content="Jevy B. Toledo">
     <meta name="robots" content="index, follow">
 
@@ -35,6 +35,293 @@
 
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Problem-Solving Section Styles -->
+    <style id="problem-solving-section-styles">
+        .problem-solving-section {
+            --ps-surface: rgba(18, 28, 47, 0.82);
+            --ps-surface-soft: rgba(24, 37, 60, 0.68);
+            --ps-border: rgba(148, 163, 184, 0.22);
+            --ps-text: #edf3ff;
+            --ps-muted: #aab8ce;
+            --ps-green: #6ee7b7;
+            --ps-violet: #a78bfa;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        html[data-theme="light"] .problem-solving-section {
+            --ps-surface: rgba(255, 255, 255, 0.92);
+            --ps-surface-soft: rgba(246, 248, 255, 0.96);
+            --ps-border: rgba(32, 48, 75, 0.14);
+            --ps-text: #17243a;
+            --ps-muted: #56647a;
+            --ps-green: #047857;
+            --ps-violet: #6d28d9;
+        }
+
+        .problem-solving-section::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: 4%;
+            left: -10rem;
+            width: 24rem;
+            height: 24rem;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(110, 231, 183, 0.10), transparent 68%);
+            pointer-events: none;
+        }
+
+        .ps-intro-copy {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .ps-process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1rem;
+            margin: 2.25rem 0 3.5rem;
+        }
+
+        .ps-step-card,
+        .ps-case-card {
+            min-width: 0;
+            border: 1px solid var(--ps-border);
+            border-radius: 20px;
+            background: var(--ps-surface);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+            transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+        }
+
+        .ps-step-card {
+            padding: 1.35rem;
+        }
+
+        .ps-step-card:hover,
+        .ps-case-card:hover {
+            transform: translateY(-4px);
+            border-color: color-mix(in srgb, var(--ps-green) 48%, var(--ps-border));
+            box-shadow: 0 22px 48px rgba(0, 0, 0, 0.14);
+        }
+
+        .ps-step-topline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: 1.1rem;
+        }
+
+        .ps-step-index {
+            display: inline-grid;
+            place-items: center;
+            width: 2.65rem;
+            height: 2.65rem;
+            flex: 0 0 auto;
+            border-radius: 12px;
+            color: #07151b;
+            background: linear-gradient(135deg, var(--ps-green), var(--ps-violet));
+            font: 800 0.78rem/1 "JetBrains Mono", monospace;
+        }
+
+        .ps-step-kind {
+            color: var(--ps-muted);
+            font: 600 0.68rem/1.3 "JetBrains Mono", monospace;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+        }
+
+        .ps-step-card h3,
+        .ps-case-card h4 {
+            margin: 0 0 0.65rem;
+            color: var(--ps-text);
+            font-size: 1.05rem;
+            line-height: 1.4;
+        }
+
+        .ps-step-card p,
+        .ps-case-card p {
+            margin: 0;
+            color: var(--ps-muted);
+            font-size: 0.91rem;
+            line-height: 1.75;
+        }
+
+        .ps-applied-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .ps-applied-heading h3 {
+            margin: 0.4rem 0 0;
+            color: var(--ps-text);
+            font-size: clamp(1.35rem, 2.5vw, 1.9rem);
+            line-height: 1.25;
+        }
+
+        .ps-eyebrow {
+            color: var(--ps-green);
+            font: 700 0.72rem/1.4 "JetBrains Mono", monospace;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .ps-case-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .ps-case-card {
+            padding: 1.5rem;
+            background: var(--ps-surface-soft);
+        }
+
+        .ps-case-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .ps-case-number {
+            color: var(--ps-muted);
+            font: 700 0.68rem/1.4 "JetBrains Mono", monospace;
+            letter-spacing: 0.08em;
+        }
+
+        .ps-case-type {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid var(--ps-border);
+            border-radius: 999px;
+            padding: 0.3rem 0.55rem;
+            color: var(--ps-green);
+            font-size: 0.68rem;
+            font-weight: 700;
+        }
+
+        .ps-case-card h4 {
+            font-size: 1.06rem;
+            margin-bottom: 1rem;
+        }
+
+        .ps-case-point {
+            padding-left: 0.8rem;
+            border-left: 2px solid var(--ps-border);
+            margin-top: 0.9rem;
+        }
+
+        .ps-case-point strong {
+            display: block;
+            margin-bottom: 0.25rem;
+            color: var(--ps-text);
+            font-size: 0.78rem;
+            letter-spacing: 0.02em;
+        }
+
+        .ps-checklist-panel {
+            display: grid;
+            grid-template-columns: minmax(210px, 0.8fr) minmax(0, 1.6fr);
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 1.25rem;
+            padding: 1.4rem 1.5rem;
+            border: 1px solid var(--ps-border);
+            border-radius: 20px;
+            background: linear-gradient(125deg, var(--ps-surface), var(--ps-surface-soft));
+        }
+
+        .ps-checklist-panel h3 {
+            margin: 0 0 0.4rem;
+            color: var(--ps-text);
+            font-size: 1rem;
+        }
+
+        .ps-checklist-panel p {
+            margin: 0;
+            color: var(--ps-muted);
+            font-size: 0.87rem;
+            line-height: 1.65;
+        }
+
+        .ps-checklist-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+        }
+
+        .ps-checklist-chips span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            border: 1px solid var(--ps-border);
+            border-radius: 999px;
+            padding: 0.5rem 0.7rem;
+            color: var(--ps-text);
+            background: var(--ps-surface);
+            font-size: 0.76rem;
+            line-height: 1.25;
+        }
+
+        .ps-checklist-chips span::before {
+            content: "✓";
+            color: var(--ps-green);
+            font-weight: 800;
+        }
+
+        @media (max-width: 1000px) {
+            .ps-process-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .ps-case-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .ps-process-grid {
+                grid-template-columns: 1fr;
+                margin: 1.5rem 0 2.5rem;
+            }
+
+            .ps-step-card,
+            .ps-case-card {
+                padding: 1.15rem;
+            }
+
+            .ps-applied-heading {
+                align-items: flex-start;
+            }
+
+            .ps-checklist-panel {
+                grid-template-columns: 1fr;
+                padding: 1.15rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .ps-step-card,
+            .ps-case-card {
+                transition: none;
+            }
+
+            .ps-step-card:hover,
+            .ps-case-card:hover {
+                transform: none;
+            }
+        }
+    </style>
 
     <!-- Anti-FOUC Theme Script (executes immediately) -->
     <script>
@@ -75,6 +362,7 @@
                     <li><a href="#resume" class="nav-link" id="nav-resume">Résumé</a></li>
                     <li><a href="#skills" class="nav-link" id="nav-skills">Skills</a></li>
                     <li><a href="#projects" class="nav-link" id="nav-projects">Projects</a></li>
+                    <li><a href="#problem-solving" class="nav-link" id="nav-problem-solving">Problem Solving</a></li>
                     <li><a href="#certificates" class="nav-link" id="nav-certificates">Certificates</a></li>
                     <li><a href="#journey" class="nav-link" id="nav-journey">Journey</a></li>
                     <li><a href="#interview" class="nav-link" id="nav-interview">Interview</a></li>
@@ -145,6 +433,7 @@
                 <li><a href="#resume" class="mobile-nav-link">Official Résumé</a></li>
                 <li><a href="#skills" class="mobile-nav-link">Skills &amp; Stack</a></li>
                 <li><a href="#projects" class="mobile-nav-link">Featured Projects</a></li>
+                <li><a href="#problem-solving" class="mobile-nav-link">Problem Solving</a></li>
                 <li><a href="#certificates" class="mobile-nav-link">Certificates</a></li>
                 <li><a href="#journey" class="mobile-nav-link">My Journey</a></li>
                 <li><a href="#interview" class="mobile-nav-link">Mock Interview</a></li>
@@ -1380,6 +1669,153 @@
         </section>
 
 
+        <!-- ============================================================
+         Problem-Solving Component
+         ============================================================ -->
+        <section class="section problem-solving-section" id="problem-solving" aria-labelledby="problem-solving-title">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-badge">Logic · Analysis · Debugging</span>
+                    <h2 class="section-title" id="problem-solving-title">My Problem-Solving Approach</h2>
+                    <p class="section-subtitle ps-intro-copy">
+                        I handle technical challenges by understanding the issue first, breaking it into smaller tasks,
+                        testing a practical solution, and checking the result. These are the steps I use to learn from
+                        errors and improve my projects.
+                    </p>
+                </div>
+
+                <div class="ps-process-grid" aria-label="My problem-solving process">
+                    <article class="ps-step-card">
+                        <div class="ps-step-topline">
+                            <span class="ps-step-index">01</span>
+                            <span class="ps-step-kind">Analyze</span>
+                        </div>
+                        <h3>Understand the Problem</h3>
+                        <p>Identify what should happen, what actually happens, and the steps needed to reproduce the
+                            issue.</p>
+                    </article>
+                    <article class="ps-step-card">
+                        <div class="ps-step-topline">
+                            <span class="ps-step-index">02</span>
+                            <span class="ps-step-kind">Break Down</span>
+                        </div>
+                        <h3>Check One Part at a Time</h3>
+                        <p>Separate the user interface, application logic, data, or hardware behavior so the likely
+                            cause is easier to find.</p>
+                    </article>
+                    <article class="ps-step-card">
+                        <div class="ps-step-topline">
+                            <span class="ps-step-index">03</span>
+                            <span class="ps-step-kind">Debug</span>
+                        </div>
+                        <h3>Test a Practical Fix</h3>
+                        <p>Use browser tools, validation, logs, and small changes to test possible solutions without
+                            changing too many things at once.</p>
+                    </article>
+                    <article class="ps-step-card">
+                        <div class="ps-step-topline">
+                            <span class="ps-step-index">04</span>
+                            <span class="ps-step-kind">Verify</span>
+                        </div>
+                        <h3>Retest and Improve</h3>
+                        <p>Check the normal workflow and edge cases again, then improve the code or circuit so the
+                            solution is easier to maintain.</p>
+                    </article>
+                </div>
+
+                <div class="ps-applied-heading">
+                    <div>
+                        <span class="ps-eyebrow">Applied to my projects</span>
+                        <h3>Examples of Thinking Through a Challenge</h3>
+                    </div>
+                </div>
+
+                <div class="ps-case-grid">
+                    <article class="ps-case-card">
+                        <div class="ps-case-meta">
+                            <span class="ps-case-number">CASE 01 / WEB</span>
+                            <span class="ps-case-type">TapSeafood</span>
+                        </div>
+                        <h4>Making the cart and checkout more reliable</h4>
+                        <div class="ps-case-point">
+                            <strong>Challenge</strong>
+                            <p>Order totals can become incorrect when quantities change, or checkout details are
+                                missing.</p>
+                        </div>
+                        <div class="ps-case-point">
+                            <strong>My approach</strong>
+                            <p>Check quantity and price calculations separately, validate required customer fields, and
+                                test changes such as increasing an item quantity or submitting incomplete details.</p>
+                        </div>
+                        <div class="ps-case-point">
+                            <strong>What I focus on</strong>
+                            <p>Clear totals, useful validation messages, and a consistent ordering flow.</p>
+                        </div>
+                    </article>
+
+                    <article class="ps-case-card">
+                        <div class="ps-case-meta">
+                            <span class="ps-case-number">CASE 02 / WEB</span>
+                            <span class="ps-case-type">GrandStay</span>
+                        </div>
+                        <h4>Checking booking dates and stay costs</h4>
+                        <div class="ps-case-point">
+                            <strong>Challenge</strong>
+                            <p>Invalid date ranges can cause incorrect stay lengths or confusing reservation totals.</p>
+                        </div>
+                        <div class="ps-case-point">
+                            <strong>My approach</strong>
+                            <p>Validate check-in and check-out dates, calculate the number of nights, review the price
+                                calculation, and test invalid or conflicting date ranges before confirming a booking.
+                            </p>
+                        </div>
+                        <div class="ps-case-point">
+                            <strong>What I focus on</strong>
+                            <p>Accurate calculations, understandable errors, and a clear reservation process.</p>
+                        </div>
+                    </article>
+
+                    <article class="ps-case-card">
+                        <div class="ps-case-meta">
+                            <span class="ps-case-number">CASE 03 / HARDWARE</span>
+                            <span class="ps-case-type">SmartDispense</span>
+                        </div>
+                        <h4>Handling sensor detection and pump timing</h4>
+                        <div class="ps-case-point">
+                            <strong>Challenge</strong>
+                            <p>The dispenser needs to respond to a nearby cup and avoid leaving the pump running longer
+                                than intended.</p>
+                        </div>
+                        <div class="ps-case-point">
+                            <strong>My approach</strong>
+                            <p>Check ultrasonic distance readings, confirm the trigger condition, test relay and pump
+                                behavior, and include a timed shutoff in the control logic.</p>
+                        </div>
+                        <div class="ps-case-point">
+                            <strong>What I focus on</strong>
+                            <p>Reliable detection, predictable operation, and a clear status message for the user.</p>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="ps-checklist-panel">
+                    <div>
+                        <h3>My debugging checklist</h3>
+                        <p>I prefer to fix the cause of an issue rather than only hide the symptom, and I retest after
+                            making changes.</p>
+                    </div>
+                    <div class="ps-checklist-chips" aria-label="Problem-solving skills">
+                        <span>Reproduce the issue</span>
+                        <span>Read console or logs</span>
+                        <span>Trace input to output</span>
+                        <span>Test edge cases</span>
+                        <span>Retest the workflow</span>
+                        <span>Document the fix</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Certificates -->
         <section class="section certificates-section" id="certificates" aria-labelledby="certificates-title">
             <div class="container">
@@ -2051,6 +2487,7 @@
                         <li><a href="#resume">Official Résumé</a></li>
                         <li><a href="#skills">Skills &amp; Stack</a></li>
                         <li><a href="#projects">Portfolio Projects</a></li>
+                        <li><a href="#problem-solving">Problem Solving</a></li>
                         <li><a href="#journey">Learning Timeline</a></li>
                         <li><a href="#interview">Mock Interview</a></li>
                         <li><a href="#contact">Get In Touch</a></li>
@@ -2155,97 +2592,7 @@
             </div>
         </div>
     </div>
- <section class="section portfolio-extra-section" id="problem-solving">
-        <div class="container">
-            <div class="section-header"> <span class="section-tag">// 04. Analytical Thinking</span>
-                <h2 class="section-title">Problem <span class="neon-text">Solving</span></h2>
-                <p class="section-desc">How I approach common development challenges and work toward practical, reliable
-                    solutions.</p>
-            </div>
-            <div class="extra-grid">
-                <article class="extra-card">
-                    <div class="extra-icon">🔍</div><span class="extra-tag">STEP 01</span>
-                    <h3>Identify the Problem</h3>
-                    <p>I identify what is not working as expected, review requirements, observe the problem, and
-                        determine which part of the system needs attention.</p>
-                </article>
-                <article class="extra-card">
-                    <div class="extra-icon">🧩</div><span class="extra-tag">STEP 02</span>
-                    <h3>Analyze Possible Causes</h3>
-                    <p>I check the related code, user inputs, database records, and system behavior. Breaking a large
-                        issue into smaller parts helps me find possible causes.</p>
-                </article>
-                <article class="extra-card">
-                    <div class="extra-icon">🛠️</div><span class="extra-tag">STEP 03</span>
-                    <h3>Develop a Solution</h3>
-                    <p>I try a suitable solution, keep code organized, validate inputs, and make changes without
-                        unnecessarily affecting other features.</p>
-                </article>
-                <article class="extra-card">
-                    <div class="extra-icon">✅</div><span class="extra-tag">STEP 04</span>
-                    <h3>Test and Improve</h3>
-                    <p>I test the updated feature, check different inputs, and correct remaining errors to make the
-                        application more dependable and easier to use.</p>
-                </article>
-            </div>
-            <article class="extra-card" style="margin-top:24px">
-                <h3>Examples From My Projects</h3>
-                <ul class="extra-list">
-                    <li><span><strong>Food Ordering System:</strong> Organizing menu information and checking order
-                            inputs to help reduce incorrect order details.</span></li>
-                    <li><span><strong>Hotel Booking System:</strong> Organizing customer and reservation records while
-                            checking room availability.</span></li>
-                    <li><span><strong>Arduino Water Dispenser:</strong> Checking sensor readings and output behavior to
-                            improve automatic dispensing.</span></li>
-                </ul>
-            </article>
-        </div>
-    </section>
-    <section class="section portfolio-extra-section" id="technical-skills">
-        <div class="container">
-            <div class="section-header"><span class="section-tag">// 05. Technical Foundation</span>
-                <h2 class="section-title">Basic <span class="neon-text">Technical Skills</span></h2>
-                <p class="section-desc">The tools and technologies I have studied and practiced through coursework and
-                    project development.</p>
-            </div>
-            <div class="extra-grid">
-                <article class="extra-card">
-                    <div class="extra-icon">🌐</div>
-                    <h3>Web Development</h3>
-                    <p>I use HTML to structure pages, CSS to style layouts, JavaScript to add interactive features, and
-                        PHP for server-side logic.</p>
-                    <div class="basic-skill-list">
-                        <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>PHP</span><span>Responsive
-                            Design</span>
-                    </div>
-                </article>
-                <article class="extra-card">
-                    <div class="extra-icon">🗄️</div>
-                    <h3>Database Management</h3>
-                    <p>I practice organizing information into tables, connecting related records, and using database
-                        queries to manage stored data.</p>
-                    <div class="basic-skill-list"><span>MySQL</span><span>SQL Basics</span><span>Table
-                            Design</span><span>CRUD Operations</span><span>Data Validation</span></div>
-                </article>
-                <article class="extra-card">
-                    <div class="extra-icon">🤖</div>
-                    <h3>Hardware and IoT</h3>
-                    <p>I have experience with an Arduino project that uses a sensor and a control component to perform
-                        an automatic dispensing task.</p>
-                    <div class="basic-skill-list"><span>Arduino</span><span>C++ Basics</span><span>Ultrasonic
-                            Sensor</span><span>Relay</span><span>Hardware Testing</span></div>
-                </article>
-                <article class="extra-card">
-                    <div class="extra-icon">🧰</div>
-                    <h3>Development and Troubleshooting</h3>
-                    <p>I practice finding errors, testing features, organizing files, and improving my work based on
-                        feedback and test results.</p>
-                    <div class="basic-skill-list"><span>Debugging</span><span>Testing</span><span>Problem
-                            Solving</span><span>GitHub Basics</span><span>Documentation</span></div>
-                </article>
-            </div>
-        </div>
-    </section>
+
     <!-- Global Toast Notification Container -->
     <div class="toast-notification" id="toast-notification" role="status" aria-live="polite">
         <span class="toast-icon" id="toast-icon">✓</span>
